@@ -5,16 +5,12 @@
     path: /usr/local/bin
     state: directory
 
-- name: Ensure smartmontools is available
+- name: Ensure smartmontools and sponge are available
   become: True
   ansible.builtin.package:
-    name: smartmontools
-    state: present
-
-- name: Ensure sponge is available
-  become: True
-  ansible.builtin.package:
-    name: moreutils
+    name:
+      - smartmontools
+      - moreutils
     state: present
 
 - name: Copy smartmon.sh to /usr/local/bin
