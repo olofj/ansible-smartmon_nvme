@@ -1,2 +1,7 @@
 ---
 smartmon_nvme: True
+# Default output file. If your node-exporter picks up file exports from somewhere
+# else, you need to point this to a subdirectory where it does that.
+smartmon_outdir: /var/lib/node_exporter
+# Run as root by default. Unfortunately smartctl needs this. :(
+smartmon_user: root

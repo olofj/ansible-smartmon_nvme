@@ -27,7 +27,7 @@
 - name: Ensure output directory exists
   become: True
   file:
-    path: /var/lib/node_exporter
+    path: " {{ smartmon_outdir }}"
     state: directory
 
 - name: Set up cron job for smartmon.sh
@@ -35,6 +35,6 @@
   cron:
     name: "smartmon_nvme"
     minute: "*/5"
-    job: "/usr/local/bin/smartmon.sh | /usr/bin/sponge /var/lib/node_exporter/smartmon.prom"
+    job: "/usr/local/bin/smartmon.sh | /usr/bin/sponge {{ smartmon_outdir }}/smartmon.prom"
     cron_file: smartmon_nvme_cron
-    user: root
+    user: "{{ smartmon_user }}"
