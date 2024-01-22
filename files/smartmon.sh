@@ -17,7 +17,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Check if smartctl is installed
-if ! command -v smartctl >/dev/null 2>&1; then
+if ! command -v /usr/sbin/smartctl >/dev/null 2>&1; then
   echo "${0##*/}: smartctl is not installed. Aborting." >&2
   exit 1
 fi
