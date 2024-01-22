@@ -1,0 +1,40 @@
+---
+- name: Ensure /usr/local/bin exists
+  become: True
+  file:
+    path: /usr/local/bin
+    state: directory
+
+- name: Ensure smartmontools is available
+  become: True
+  ansible.builtin.package:
+    name: smartmontools
+    state: present
+
+- name: Ensure sponge is available
+  become: True
+  ansible.builtin.package:
+    name: moreutils
+    state: present
+
+- name: Copy smartmon.sh to /usr/local/bin
+  become: True
+  copy:
+    src: smartmon.sh
+    dest: /usr/local/bin/smartmon.sh
+    mode: '0755'
+
+- name: Ensure output directory exists
+  become: True
+  file:
+    path: /var/lib/node_exporter
+    state: directory
+
+- name: Set up cron job for smartmon.sh
+  become: True
+  cron:
+    name: "smartmon_nvme"
+    minute: "*/5"
+    job: "/usr/local/bin/smartmon.sh | /usr/bin/sponge /var/lib/node_exporter/smartmon.prom"
+    cron_file: smartmon_nvme_cron
+    user: root

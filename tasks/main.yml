@@ -1,0 +1,4 @@
+---
+- name: Run actual smartmon tasks
+  include_tasks: smartmon.yml
+  when: smartmon_nvme
