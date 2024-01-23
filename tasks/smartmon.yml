@@ -23,7 +23,7 @@
 - name: Ensure output directory exists
   become: True
   file:
-    path: " {{ smartmon_outdir }}"
+    path: "{{ smartmon_outdir }}"
     state: directory
 
 - name: Set up cron job for smartmon.sh
