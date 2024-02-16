@@ -2,3 +2,7 @@
 - name: Run actual smartmon tasks
   include_tasks: smartmon.yml
   when: smartmon_nvme
+
+- name: Remove smartmon tasks
+  include_tasks: uninstall_smartmon.yml
+  when: not smartmon_nvme

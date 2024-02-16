@@ -1,0 +1,21 @@
+---
+- name: Remove smartmon.sh from /usr/local/bin
+  become: True
+  file:
+    path: /usr/local/bin/smartmon.sh
+    state: absent
+
+- name: Remove output directory
+  become: True
+  file:
+    path: "{{ smartmon_outdir }}"
+    state: absent
+
+- name: Remove cron job for smartmon.sh
+  become: True
+  cron:
+    name: "smartmon_nvme"
+    cron_file: smartmon_nvme_cron
+    user: "{{ smartmon_user }}"
+    state: absent
+
